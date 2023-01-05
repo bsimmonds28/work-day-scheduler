@@ -49,7 +49,6 @@ var timeblockArray = [
     hour: 17
   }
 ]
-console.log(timeblockArray);
 
 /* Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 the code isn't run until the browser has finished rendering all the elements
@@ -62,10 +61,7 @@ window.addEventListener("load", (event) => {
     displayDate.text(currentTime.format('dddd, MMMM D, YYYY'));
 
     /* Add code to apply the past, present, or future class to each time
-    block by comparing the id to the current hour. HINTS: How can the id
-    attribute of each time-block be used to conditionally add or remove the
-    past, present, and future classes? How can Day.js be used to get the
-    current hour in 24-hour time? */
+    block by comparing the id to the current hour. */
 
     for (var i = 0; i < timeblockArray.length; i++) {
         militaryTime = currentTime.format('HH');
@@ -78,12 +74,7 @@ window.addEventListener("load", (event) => {
         }
     };
 
-    /* TODO: Add a listener for click events on the save button. This code should
-    use the id in the containing time-block as a key to save the user input in
-    local storage. HINT: What does `this` reference in the click listener
-    function? How can DOM traversal be used to get the "hour-x" id of the
-    time-block containing the button that was clicked? How might the id be
-    useful when saving the description in local storage? */
+    /* Added a listener for click events on the save button. */
 
     /* Save users input when they click save */
     saveButton.on('click', saveInput);
@@ -94,15 +85,12 @@ window.addEventListener("load", (event) => {
         textArea = $(this).siblings('textarea').val();
 
         if (textArea != null) {
-          var userInputTemp = [
+          var userInputTemp = 
             {
               input: textArea,
               timeId: $(this).parent().attr('id')
-            }
-          ];
-          console.log(userInputTemp);
+            };
           userInput.push(userInputTemp);
-          console.log(userInput);
         }
 
         storeInput();
@@ -125,16 +113,20 @@ window.addEventListener("load", (event) => {
     }
     init();
 
-    // TODO: Add code to get any user input that was saved in localStorage and set
-    // the values of the corresponding textarea elements. HINT: How can the id
-    // attribute of each time-block be used to do this?
+    /* Added code to get any user input that was saved in localStorage and set
+    the values of the corresponding textarea elements. */
 
     function renderInput() {
       for (var i = 0; i < userInput.length; i++) {
         var userInputLoop = userInput[i].timeId;
-        for (var k = 0; k < timeblockArray.length; k++) {
-          if (userInputLoop == timeblockArray[k].idValue) {
-            id = $(userInputLoop).val(userInput.input);
+        var userInputRender = userInput[i].input;
+        if (userInputLoop !== null) {
+          for (var k = 0; k < timeblockArray.length; k++) {
+            if (userInputLoop == timeblockArray[k].idValue) {
+              var id = "#" + userInputLoop;
+              var selectId = $(id).children('textarea');
+              selectId.text(userInputRender);
+            }
           }
         }
       }
