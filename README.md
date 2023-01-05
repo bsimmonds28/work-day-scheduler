@@ -11,3 +11,4 @@ The following shows the layout of the application. Please note that the picture 
 ![A picture of the color-coded calendar and with events.](./Assets/scheduler-screenshot.png)
 
 ## Link
+https://bsimmonds28.github.io/work-day-scheduler/
