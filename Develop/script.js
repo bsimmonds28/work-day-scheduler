@@ -65,7 +65,7 @@ window.addEventListener("load", (event) => {
 
     for (var i = 0; i < timeblockArray.length; i++) {
         militaryTime = currentTime.format('HH');
-        if (timeblockArray[i].hour = militaryTime) {
+        if (timeblockArray[i].hour == militaryTime) {
           timeblockArray[i].id.addClass('present');
         } else if (timeblockArray[i].hour < militaryTime) {
           timeblockArray[i].id.addClass('past');
